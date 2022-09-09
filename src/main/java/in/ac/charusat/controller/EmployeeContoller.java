@@ -18,6 +18,10 @@ public class EmployeeContoller
     {
         return employeeRepository.findAll();
     }
+    @GetMapping("/emp/{id}")
+    public Employee20it051 getStudent(@PathVariable Integer id) {
+        return employeeRepository.findById(id).get();
+    }
     @PostMapping("/employee")
     public List<Employee20it051> addStudent(@RequestBody Employee20it051 emp)
     {
@@ -30,5 +34,17 @@ public class EmployeeContoller
         employeeRepository.delete(employeeRepository.findById(id).get());
         return employeeRepository.findAll();
     }
+    @PutMapping("/update/{id}")
+    public List<Employee20it051> updateEmployee(@RequestBody Employee20it051 emp ,@PathVariable Integer id)
+    {
+        Employee20it051 empobj=employeeRepository.findById(id).get();
+        empobj.setName(emp.getName());
+        empobj.setAddress(emp.getAddress());
+        employeeRepository.save(empobj);
+        return employeeRepository.findAll();
+    }
+
+
+
 
 }
